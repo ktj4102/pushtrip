@@ -39,9 +39,10 @@
 
 <hr/>
 
-### 서비스 시연 영상
+### 💿서비스 시연 영상
 
 [![pushtripYouTube](https://github.com/user-attachments/assets/aa37c5fe-39a8-483e-82b2-df3ba0fba875)](https://youtu.be/rt0gXZzta-8)
+<hr/>
 pushtripYouTube
 
 ### 🎯서비스 핵심기능
