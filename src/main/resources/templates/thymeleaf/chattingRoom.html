@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>pushtrip</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="resources/css/room.css">
+</head>
+<body>
+<div class="floating-chat">
+    <div class="chat-icon">
+        <i class="fa fa-comments" aria-hidden="true"></i>
+        <span id="badge" class="badge">0</span> <!-- 새로운 메시지 수를 표시할 배지 -->
+    </div>
+    <div class="chat">
+        <div class="header">
+            <span class="title">pushtrip</span>
+            <button id="close-chat" class="close-btn" aria-label="Close Chat">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+        </div>
+        <ul id="msgArea" class="messages"></ul>
+        <div class="footer">
+            <div id="opinion" class="text-box" contenteditable="true"></div> <!-- 'disabled="true"' 제거 -->
+        </div>
+    </div>
+</div>
+
+<!-- partial -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src="resources/js/chat_room.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+<script>
+    let username = ''; // 전역 변수로 설정
+    let oldTitle = document.title; // oldTitle 변수 초기화
+
+    function sendTokenToServer() {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+        $.ajax({
+            url: '/decode-token',
+            type: 'POST',
+            contentType: 'application/json',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            success: function(data) {
+                console.log('Role data retrieved successfully:', data);
+                username = data.userId;
+                initializeWebSocket(username);
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    } else {
+        console.warn('No access token found in local storage.');
+    }
+}
+
+
+    function initializeWebSocket(username) {
+    const websocket = new WebSocket("ws://localhost:8082/ws/chat");
+    websocket.onmessage = onMessage;
+    websocket.onopen = onOpen;
+    websocket.onclose = onClose;
+
+    let isSeeing = true;
+    let newMessageCount = 0;
+
+    $(document).ready(function() {
+        $(".fa-comments").on("click", function() {
+            $(".floating-chat").toggleClass("expand");
+        });
+
+        $(".floating-chat").on("click", function() {
+            newMessageCount = 0; // 채팅창을 열면 메시지 카운트 초기화
+            updateBadge();
+        });
+
+        $("#close-chat").on("click", function() {
+            $(".floating-chat").removeClass("expand");
+        });
+
+        $("#disconn").on("click", (e) => {
+            disconnect();
+        });
+
+        $("#button-send").on("click", (e) => {
+            send();
+        });
+
+        $(document).on("keydown", function(e) {
+            if (e.key === "Enter") {
+                send();
+            }
+        });
+    });
+
+    function send() {
+        const message = $("#opinion").text().trim();
+        console.log(username + ":" + message);
+        if (message !== "") {
+            if (websocket.readyState === WebSocket.OPEN) {
+                websocket.send(username + ":" + message);
+                $("#opinion").text(''); // 메시지 전송 후 입력란 비우기
+            } else {
+                console.error('WebSocket is not open.');
+            }
+        }
+    }
+
+    function onClose(evt) {
+        console.log('WebSocket closed:', evt);
+    }
+
+    function onOpen(evt) {
+        console.log('WebSocket opened:', evt);
+    }
+
+    function onMessage(msg) {
+        const data = msg.data;
+        const arr = data.split(":");
+        const cur_session = username;
+
+        if (arr.length < 2) return; // 데이터 형식이 잘못된 경우 처리
+
+        const sessionId = arr[0];
+        let message = arr[1];
+
+
+        let str = "";
+        if (sessionId === cur_session) {
+            str = "<li class='other'>" + message + "</li>";
+        } else {
+            str = "<li class='self'>" +cur_session+ "<br>"+":"+ message + "</li>";
+
+            if (!isSeeing) {
+                newMessageCount++;
+                updateBadge();
+            }
+        }
+
+        $("#msgArea").append(str);
+        document.getElementById("msgArea").scrollTop = document.getElementById("msgArea").scrollHeight;
+    }
+
+    function updateBadge() {
+        const badge = document.getElementById('badge');
+        if (badge) {
+            if (newMessageCount > 0) {
+                badge.textContent = newMessageCount;
+                badge.style.display = 'inline'; // 배지 표시
+            } else {
+                badge.style.display = 'none'; // 배지 숨김
+            }
+        }
+    }
+
+    window.addEventListener('focus', function() {
+        isSeeing = true;
+        document.title = oldTitle;
+    });
+
+    window.addEventListener('blur', function() {
+        isSeeing = false;
+    });
+}
+
+
+    // 페이지 로드 시 토큰을 서버로 전송
+    $(document).ready(function() {
+        sendTokenToServer();
+    });
+</script>
+</body>
+</html>

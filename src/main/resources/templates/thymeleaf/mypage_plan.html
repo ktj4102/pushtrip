@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="imagetoolbar" content="no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="title" content="웹사이트">
+  <meta name="description" content="웹사이트입니다.">
+  <meta name="keywords" content="키워드,키워드,키워드">
+  <meta property="og:title" content="웹사이트">
+  <meta property="og:description" content="웹사이트입니다">
+  <meta property="og:image" content="https://웹사이트/images/opengraph.png">
+  <meta property="og:url" content="https://웹사이트">
+  <title>마이페이지</title>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+  integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
+<script>
+  Kakao.init('e6de34d5bc8daf191f46966ee3179780'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
+  <style>
+        .search-results {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .planner-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .planner-item {
+            flex: 0 0 calc(50% - 20px); /* 두 개씩 배치하고, 간격을 고려하여 50%에서 20px 뺍니다 */
+            box-sizing: border-box; /* padding과 border를 포함한 너비 계산 */
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative; /* 버튼의 위치를 조정하기 위해 상대적 위치 설정 */
+        }
+        .planner-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .planner-detail {
+            margin-bottom: 5px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-end; /* 버튼들을 오른쪽으로 정렬 */
+            gap: 10px; /* 버튼 사이의 간격 */
+            margin-top: 10px;
+        }
+        .btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 0.9em;
+        }
+        .btn-edit {
+            background-color: #007bff; /* 수정 버튼 색상 */
+        }
+        .btn-delete {
+            background-color: #dc3545; /* 삭제 버튼 색상 */
+        }
+        .btn-share {
+            background-color: #28a745; /* 공유 버튼 색상 */
+        }
+  </style>
+  <link rel="stylesheet" href="../resources/css/setting.css">
+  <link rel="stylesheet" href="../resources/css/plugin.css">
+  <link rel="stylesheet" href="../resources/css/template.css">
+  <link rel="stylesheet" href="../resources/css/style.css">
+</head>
+
+<body>
+<div class="campland-N14" data-bid="chatting">
+  <div class="contents-container container-md">
+    <div id="chattingRoom">
+      <!-- 채팅방 -->
+
+    </div>
+  </div>
+</div>
+  <!-- [S]campland-N1 -->
+  <header class="campland-N1" data-bid="KcLyI3r0UT">
+    <div class="header-inner">
+      <div class="header-container container-lg">
+        <div class="header-left">
+          <h1 class="header-title">
+            <a href="/main">
+              <img src="/resources/images/pushtrip_logo.png" alt="로고">
+            </a>
+          </h1>
+        </div>
+        <div class="header-center">
+          <ul class="header-member">
+            <li>
+              <a href="/loginForm">로그인</a>
+            </li>
+            <li>
+              <a href="/join">회원가입</a>
+            </li>
+          </ul>
+          <ul class="header-gnblist">
+            <li class="header-gnbitem">
+              <a class="header-gnblink" href="javascript:void(0)">
+                <span>여행</span>
+              </a>
+              <ul class="header-sublist">
+                <li class="header-subitem">
+                  <a class="header-sublink" href="introduction">
+                    <span>소개</span>
+                  </a>
+                </li>
+                <li class="header-subitem">
+                  <a class="header-sublink" href="Top5">
+                    <span>추천여행</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="header-gnbitem">
+              <a class="header-gnblink" href="javascript:void(0)">
+                <span>게시판</span>
+              </a>
+              <ul class="header-sublist">
+                <li class="header-subitem">
+                  <a class="header-sublink" href="freeForumSelectAll">
+                    <span>자유게시판</span>
+                  </a>
+                </li>
+                <li class="header-subitem">
+                  <a class="header-sublink" href="travelForumSelectAll">
+                    <span>여행게시판</span>
+                  </a>
+                </li>
+                <li class="header-subitem">
+                  <a class="header-sublink" href="tradeForumSelectAll">
+                    <span>중고거래</span>
+                  </a>
+                </li>
+              </ul>
+            <li class="header-gnbitem">
+              <a class="header-gnblink" href="javascript:void(0)">
+                <span>공지사항</span>
+              </a>
+              <ul class="header-sublist">
+                <li class="header-subitem">
+                  <a class="header-sublink" href="noticeForumSelectAll">
+                    <span>공지사항</span>
+                  </a>
+                </li>
+                <li class="header-subitem">
+                  <a class="header-sublink" href="questionForumSelectAll">
+                    <span>문의사항</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="header-right">
+          <div class="header-utils">
+            <a id="profileContainer" class="header-utils">
+            </a>
+            <a href="/mypage" class="btn-profile header-utils-btn">
+              <img src="/resources/icons/ico_profile_black.svg" alt="마이페이지">
+              <span class="tooltip-text">마이페이지</span>
+            </a>
+            <a href="javascript:void(0)" onclick="openMessagePopup()" class="btn-profile header-utils-btn">
+              <img  src="resources/images/free-icon-message-5941217.png" alt="쪽지함 아이콘">
+              <span class="tooltip-text">쪽지함</span>
+            </a>
+          </div>
+        </div>
+      </div>
+        <button class="fullmenu-close">
+          <img src="/resources/icons/ico_close_m_white.svg" alt="닫기">
+        </button>
+      </div>
+    </div>
+  </header>
+  <!-- [E]campland-N1 -->
+  <main class="th-layout-main ">
+    <!-- [S]campland-N23 -->
+    <div class="campland-N23" data-bid="OELYwK4lxS">
+      <div class="contents-inner">
+        <div class="contents-container">
+          <div class="textset textset-sub textset-center">
+            <h2 class="textset-tit">My Page</h2>
+          </div>
+          <ul class="contents-group contents-profile">
+            <li class="contents-profile-item">
+              <div class="imageset">
+                <img class="imageset-img" src="../resources/images/img_profile.png" alt="프로필 이미지" id="userPicture" style="border-radius: 50%;">
+              </div>
+              <p class="contents-name"><span id="userName">Loading...</span></p>
+            </li>
+            <li class="contents-profile-item">
+              <a href="mypage_update" class="btnset btnset-round">내 정보 관리</a>
+            </li>
+          </ul>
+          <ul class="contents-group contents-benefit">
+            <li class="contents-benefit-item">
+              <a href="javascipt:void(0);" class="contents-benefit-link">
+                <div class="iconset">
+                  <img class="iconset-icon" src="../resources/icons/ico_coupon_circle.svg" alt="내 쿠폰">
+                </div>
+                <p class="contents-text">내 쿠폰</p>
+              </a>
+            </li>
+            <li class="contents-benefit-item">
+              <a href="javascipt:void(0);" class="contents-benefit-link">
+                <div class="iconset">
+                  <img class="iconset-icon" src="../resources/icons/ico_point_circle.svg" alt="포인트">
+                </div>
+                <p class="contents-text">포인트</p>
+              </a>
+            </li>
+            <li class="contents-benefit-item">
+              <a href="javascipt:void(0);" class="contents-benefit-link">
+                <div class="iconset">
+                  <img class="iconset-icon" src="../resources/icons/ico_card_circle.svg" alt="결제수단">
+                </div>
+                <p class="contents-text">결제수단</p>
+              </a>
+            </li>
+            <li class="contents-benefit-item">
+              <a href="javascipt:void(0);" class="contents-benefit-link">
+                <div class="iconset">
+                  <img class="iconset-icon" src="../resources/icons/ico_chat_circle.svg" alt="내 후기">
+                </div>
+                <p class="contents-text">내 후기</p>
+              </a>
+            </li>
+            <li class="contents-benefit-item">
+              <a href="javascipt:void(0);" class="contents-benefit-link">
+                <div class="iconset">
+                  <img class="iconset-icon" src="../resources/icons/ico_star_circle.svg" alt="내 찜">
+                </div>
+                <p class="contents-text">내 찜</p>
+              </a>
+            </li>
+          </ul>
+
+          <div class="contents-group contents-reservation">
+            <h2 class="contents-tit"> 내 일정 검색 <a href="travelPlannerTest" class="contents-more">내 일정관리</a></h2>
+            <div class="butti-N100">
+                <div class="search-container">
+                    <form id="searchForm" action="/planSearch" method="get" style="display: flex; justify: center;">
+                      <div class="search-wrapper">
+                          <!-- 사용자 ID를 빈 문자열로 초기화 -->
+                          <input id="userInput" name="userId" type="hidden" value="${userId}">
+                          <!-- 검색어를 빈 문자열로 초기화 -->
+                          <input type="text" name="searchTerm" id="searchInput" class="search-input" placeholder="일정유형으로 검색" style="background-image: url('resources/images/free-icon-search-4410940.png'); width: 800px;" value="">
+                          <button type="submit" class="btnset">검색</button>
+                      </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+
+          <div class="search-results" th:if="${plans.isEmpty()}">
+              <p>검색 결과가 없습니다.</p>
+          </div>
+
+          <div class="search-results" th:if="${!plans.isEmpty()}">
+    <div class="planner-container">
+        <div th:each="plan : ${plans}" class="planner-item">
+            <div class="planner-header">
+                <div class="planner-detail">활동 유형: <span class="plan-type" th:text="${plan.planType}"></span></div>
+                <div class="planner-detail">날짜: <span class="plan-date" th:text="${plan.planDate}"></span></div>
+                <div class="planner-detail">시간: <span class="plan-time" th:text="${plan.planTime}"></span></div>
+                <div class="planner-detail">도로명주소: <span class="road-addr" th:text="${plan.roadAddr}"></span></div>
+                <div class="planner-detail">지번주소: <span class="jibun-addr" th:text="${plan.jibunAddr}"></span></div>
+                <div class="planner-detail">예상비용: <span class="plan-cost" th:text="${plan.planCost}"></span></div>
+                <div class="planner-detail">작성날짜: <span class="insert-date" th:text="${#dates.format(plan.insertDate, 'yyyy.MM.dd HH:mm')}"></span></div>
+                <div class="planner-detail">일정메모: <span class="plan-memo" th:text="${plan.planMemo}"></span></div>
+            </div>
+            <div class="button-container">
+                <a class="kakao-share-btn" href="javascript:;">
+                  <img src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png"
+                       alt="카카오톡 공유 보내기 버튼" />
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+          <div class="contents-group contents-notice">
+            <a href="javascipt:void(0)" class="contents-notice-link">공지사항</a>
+            <a href="javascipt:void(0)" class="contents-notice-link">자주묻는질문</a>
+            <a href="javascipt:void(0)" class="contents-notice-link"> 상담원 연결 <span>
+                <em>상담시간</em> : 평일 09:00 ~ 18:00 (점심시간 12:00 ~ 13:00) </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- [E]campland-N23 -->
+  </main>
+  <!-- [S]campland-N2 -->
+  <footer class="campland-N2" data-bid="yRlYwk4M1T">
+    <div class="footer-container container-lg">
+      <div class="footer-top">
+        <h1 class="footer-logo">
+          <a href="javascript:void(0)">
+            <img src="../resources/images/img_logo_white.png" alt="로고">
+          </a>
+        </h1>
+        <ul class="footer-menulist">
+          <li class="footer-menuitem">
+            <a href="javascript:void(0)">
+              <span>이용약관</span>
+            </a>
+          </li>
+          <li class="footer-menuitem">
+            <a href="javascript:void(0)">
+              <span>개인정보처리방침</span>
+            </a>
+          </li>
+          <li class="footer-menuitem">
+            <a href="javascript:void(0)">
+              <span>푸터메뉴1</span>
+            </a>
+          </li>
+          <li class="footer-menuitem">
+            <a href="javascript:void(0)">
+              <span>푸터메뉴2</span>
+            </a>
+          </li>
+        </ul>
+        <ul class="footer-snslist">
+          <li class="footer-snsitem">
+            <a class="footer-snslink" href="javascript:void(0)">
+              <img src="../resources/icons/ico_instagram_lightgrey.svg" alt="인스타그램">
+            </a>
+          </li>
+          <li class="footer-snsitem">
+            <a class="footer-snslink" href="javascript:void(0)">
+              <img src="../resources/icons/ico_youtube_lightgrey.svg" alt="유튜브">
+            </a>
+          </li>
+          <li class="footer-snsitem">
+            <a class="footer-snslink" href="javascript:void(0)">
+              <img src="../resources/icons/ico_facebook_lightgrey.svg" alt="페이스북">
+            </a>
+          </li>
+          <li class="footer-snsitem">
+            <a class="footer-snslink" href="javascript:void(0)">
+              <img src="../resources/icons/ico_kakao_lightgrey.svg" alt="카카오톡">
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <h2 class="footer-logo">
+          <a href="javascript:void(0)">
+            <img src="../resources/images/img_logo_white.png" alt="로고">
+          </a>
+        </h2>
+        <div class="footer-txt">
+          <p> 서울시 금천구 벚꽃로36길 30 가산 KS타워 1409호 </p>
+          <p>
+            <span>T. 070-8872-8874</span>
+            <span>E. help@openfield.co.kr</span>
+          </p>
+        </div>
+        <div class="footer-txt">
+          <p>2022 BY TEMPLATEHOUSE. ALL RIGHTS RESEVED</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- [E]campland-N2 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // 모든 공유 버튼에 클릭 이벤트 리스너 추가
+    document.querySelectorAll('.kakao-share-btn').forEach(function(button) {
+        button.addEventListener('click', function() {
+            // 현재 버튼이 속한 .planner-item 요소 찾기
+            var plannerItem = button.closest('.planner-item');
+
+            // 필요한 정보 추출
+            var planType = plannerItem.querySelector('.plan-type').textContent;
+            var planDate = plannerItem.querySelector('.plan-date').textContent;
+            var planTime = plannerItem.querySelector('.plan-time').textContent;
+            var roadAddr = plannerItem.querySelector('.road-addr').textContent;
+            var jibunAddr = plannerItem.querySelector('.jibun-addr').textContent;
+            var planCost = plannerItem.querySelector('.plan-cost').textContent;
+            var planMemo = plannerItem.querySelector('.plan-memo').textContent;
+
+            // Kakao API 호출
+            Kakao.Share.createCustomButton({
+                container: button,
+                templateId: 111307, // 사용할 템플릿 ID
+                templateArgs: {
+                    'THU' : userProfilePicture,
+                    'NAME' : nameplan,
+                    'PLANTYPE': planType,
+                    'PLANDATE': planDate,
+                    'PLANTIME': planTime,
+                    'ROADADDR': roadAddr,
+                    'JIBUNADDR': jibunAddr,
+                    'PLANCOST': planCost,
+                    'PLANMEMO': planMemo,
+                },
+            });
+        });
+    });
+});
+</script>
+  <script src="resources/js/setting.js"></script>
+  <script src="resources/js/plugin.js"></script>
+  <script src="resources/js/template.js"></script>
+  <script src="resources/js/script_mypage.js"></script>
+  <script src="/resources/js/openMessage.js"></script>
+  <script src="/resources/js/chat.js"></script>
+  <script src="/resources/js/chatbot.js"></script>
+</body>

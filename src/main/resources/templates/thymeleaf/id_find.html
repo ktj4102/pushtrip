@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="imagetoolbar" content="no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="title" content="웹사이트">
+    <meta name="description" content="웹사이트입니다.">
+    <meta name="keywords" content="키워드,키워드,키워드">
+    <meta property="og:title" content="웹사이트">
+    <meta property="og:description" content="웹사이트입니다">
+    <meta property="og:image" content="https://웹사이트resources/images/opengraph.png">
+    <meta property="og:url" content="https://웹사이트">
+    <title>아이디 찾기</title>
+    <link rel="stylesheet" href="resources/css/setting.css">
+    <link rel="stylesheet" href="resources/css/plugin.css">
+    <link rel="stylesheet" href="resources/css/template.css">
+    <link rel="stylesheet" href="resources/css/style.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        .auth-section,
+        .verification-section {
+          display: none;
+        }
+
+          .contents-item {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.error-message {
+  position: absolute; /* 에러 메시지를 절대 위치로 설정 */
+  color: red;
+  font-size: 0.875em; /* 에러 메시지 크기 조정 */
+  margin-top: 1px; /* 에러 메시지와 입력 필드 간의 간격 조정 */
+  top: 100%; /* 입력 필드 바로 아래에 위치 */
+  width: 100%; /* 입력 필드와 같은 너비로 설정 */
+}
+
+.success-message {
+  position: absolute; /* 에러 메시지를 절대 위치로 설정 */
+  color: gray;
+  font-size: 0.875em; /* 에러 메시지 크기 조정 */
+  margin-top: 1px; /* 에러 메시지와 입력 필드 간의 간격 조정 */
+  top: 100%; /* 입력 필드 바로 아래에 위치 */
+  width: 100%; /* 입력 필드와 같은 너비로 설정 */
+}
+
+  .inputset-input {
+  min-height: 30px; /* 입력 필드의 최소 높이 설정 */
+  box-sizing: border-box; /* 패딩과 테두리 포함 */
+}
+    </style>
+</head>
+
+<body style="background-color: white;">
+<main class="th-layout-main" style="background-color: white;">
+    <!-- [S]campland-N24 -->
+    <div class="campland-N24" data-bid="KWLYIfJLBP" style="background-color: white;">
+        <div class="contents-inner">
+            <div class="contents-container">
+                <div class="contents-top">
+                    <div class="textset textset-center">
+                        <h1 style="color: #6699FF;">PUSHTRIP</h1>
+                        <hr>
+                        <h2 class="textset-tit">아이디를 찾으려면 전화번호 인증을 진행하세요.</h2>
+                    </div>
+                    <form id="find-id-form">
+                        <div class="inputset inputset-round">
+                            <input type="text" id="phone-number" class="inputset-input form-control" aria-label="내용" placeholder="전화번호를 입력해주세요.">
+                            <div class="error-message" id="phone-number-error"></div>
+                            <div class="success-message" id="phone-number-success"></div>
+                        </div>
+                        <button type="button" class="btnset btnset-round" style="border: 1px solid #6699FF;" id="send-phone-code">인증 코드 발송</button>
+                    </form>
+
+                    <!-- 전화번호 인증 코드 확인 화면 -->
+                    <div id="phone-verification-section" class="verification-section">
+                        <h3>전화번호 인증 코드 확인</h3>
+                        <form id="phone-verification-form">
+                            <div class="inputset inputset-round">
+                                <input type="text" id="phone-code" class="inputset-input form-control" aria-label="내용" placeholder="인증 코드를 입력해주세요.">
+                                <div class="error-message" id="phone-code-error"></div>
+                                <div class="success-message" id="phone-code-success"></div>
+                            </div>
+                            <button type="button" class="btnset btnset-round" style="border: 1px solid #6699FF;" id="verify-phone-code">인증 확인</button>
+                            <button type="button" class="btnset btnset-round" style="border: 1px solid #6699FF;" id="back-to-form">다시 시도</button>
+                        </form>
+                    </div>
+
+                    <!-- 아이디 확인 후 안내 -->
+                    <div id="id-result-section" class="verification-section">
+                        <h3>아이디 찾기 결과</h3>
+                        <p id="found-id">찾은 아이디: <span id="user-id"></span></p>
+                    </div>
+
+                    <ul class="contents-list">
+                        <li class="contents-item">
+                            <a href="/loginForm" class="btnset btnset-round" style="border: 1px solid #6699FF;">로그인하러 가기</a>
+                            <a>비밀번호가 기억이 나지 않는다면? &nbsp;</a><a href="/findPassword" style="color: #6699FF;" id="reset-id">비밀번호 찾기</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [E]campland-N24 -->
+</main>
+<!-- [E]campland-N2 -->
+<script src="resources/js/setting.js"></script>
+<script src="resources/js/plugin.js"></script>
+<script src="resources/js/template.js"></script>
+<script src="resources/js/script_auth.js"></script>
+<script src="resources/js/id_find.js"></script>
+<script src="/resources/js/chatbot.js"></script>
+</body>
+
+</html>

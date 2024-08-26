@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // 로그인 성공 후 페이지 로드 시 사용자 정보 요청
+            const accessToken = localStorage.getItem('accessToken');
+            if (accessToken) {
+                $.ajax({
+                    url: '/api/user-info',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + accessToken
+                    },
+                    success: function(userInfo) {
+                        $('#userId').text(userInfo.userId);
+                        $('#userEmail').text(userInfo.email);
+                        $('#userName').text(userInfo.name);
+                        $('#userTel').text(userInfo.tel);
+                        $('#userAccountNo').text(userInfo.accountNo);
+                        $('#userGender').text(userInfo.gender);
+                        $('#userBirth').text(userInfo.birth);
+                        $('#userZoneCode').text(userInfo.zoneCode);
+                        $('#userRoadAddr').text(userInfo.roadAddr);
+                        $('#userRoadDetail').text(userInfo.roadDetail);
+                        $('#userJibunAddr').text(userInfo.jibunAddr);
+                        $('#userRole').text(userInfo.role);
+                        $('#userInsertDate').text(userInfo.insertDate);
+                        $('#userUpdateDate').text(userInfo.updateDate);
+
+                        // Handle picture display
+                        if (userInfo.picture) {
+                            $('#userPicture').attr('src', userInfo.picture);
+                        } else {
+                            $('#userPicture').attr('src', 'default-profile.png'); // Fallback image
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error('Error:', textStatus, errorThrown);
+                        alert('사용자 정보를 가져오는 데 실패했습니다.');
+                    }
+                });
+            } else {
+                alert('로그인 정보가 없습니다.');
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <p>User ID: <span id="userId">Loading...</span></p>
+    <p>Email: <span id="userEmail">Loading...</span></p>
+    <p>Name: <span id="userName">Loading...</span></p>
+    <p>Tel: <span id="userTel">Loading...</span></p>
+    <p>Account No: <span id="userAccountNo">Loading...</span></p>
+    <p>Gender: <span id="userGender">Loading...</span></p>
+    <p>Birth: <span id="userBirth">Loading...</span></p>
+    <p>Zone Code: <span id="userZoneCode">Loading...</span></p>
+    <p>Road Address: <span id="userRoadAddr">Loading...</span></p>
+    <p>Road Detail: <span id="userRoadDetail">Loading...</span></p>
+    <p>Jibun Address: <span id="userJibunAddr">Loading...</span></p>
+    <p>Role: <span id="userRole">Loading...</span></p>
+    <p>Insert Date: <span id="userInsertDate">Loading...</span></p>
+    <p>Update Date: <span id="userUpdateDate">Loading...</span></p>
+    <p>Picture: <img id="userPicture" alt="User Picture" style="max-width: 200px;"></p>
+</body>
+</html>

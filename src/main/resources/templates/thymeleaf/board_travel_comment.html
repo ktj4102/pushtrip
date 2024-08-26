@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Comments</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="resources/js/decode.js"></script>
+</head>
+<body>
+<!-- 작성자 : 민욱 -->
+<!-- [S]campland-N14 -->
+<div class="campland-N14" data-bid="commentSection" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="contents-container container-md">
+
+        <!-- 댓글 작성 폼 -->
+        <div class="comment-form-section">
+            <h3 class="comment-form-title">댓글 작성</h3>
+            <form action="travelForumCommentInsert" method="post" class="comment-form">
+                <div class="comment-form-group">
+                    <input type="hidden" name="travelId" id="travelId" />
+                </div>
+                <div class="comment-form-group">
+                    <label for="userId">아이디</label>
+                    <input type="text" name="userId" id="userId" readonly/>
+                </div>
+                <div class="comment-form-group">
+                    <label for="commentText">댓글</label>
+                    <textarea name="commentText" id="commentText" cols="40" rows="10"></textarea>
+                </div>
+                <button type="submit" class="comment-submit-btn">등록</button>
+            </form>
+        </div>
+
+        <!-- 댓글 목록 -->
+        <div class="comments-section">
+            <h3 class="comments-title">댓글</h3>
+            <ul class="comments-list">
+                <!-- 댓글 항목 반복 시작 -->
+                <li class="comment-item" th:each="travelComment : ${cList}">
+                    <div class="comment-header">
+                        <!-- <img th:src="@{${travelComment.profileImage}}" alt="사용자 프로필 사진" class="comment-author-img"> -->
+                        <span class="comment-author" th:text="${travelComment.userId}"></span>
+                        <span class="comment-date" th:text="${#dates.format(travelComment.insertDate, 'yyyy.MM.dd HH:mm')}"></span>
+
+                        <div class="more-options">
+                            <button class="more-options-btn">⋮</button>
+                            <div class="more-options-menu">
+                                <button class="edit-btn" th:data-id="${travelComment.travelCommId}">수정</button>
+                                <button class="delete-btn" th:data-id="${travelComment.travelCommId}">삭제</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <p class="comment-text" th:text="${travelComment.commentText}"></p>
+                </li>
+                <!-- 댓글 항목 반복 끝 -->
+            </ul>
+        </div>
+        <!-- 댓글 항목 끝 -->
+
+    </div>
+</div>
+<!-- [E]campland-N14 -->
+
+<script src="resources/js/script_board_travel_comment.js"></script>
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="imagetoolbar" content="no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="title" content="웹사이트">
+  <meta name="description" content="웹사이트입니다.">
+  <meta name="keywords" content="키워드,키워드,키워드">
+  <meta property="og:title" content="웹사이트">
+  <meta property="og:description" content="웹사이트입니다">
+  <meta property="og:image" content="https://웹사이트/images/opengraph.png">
+  <meta property="og:url" content="https://웹사이트">
+  <title>마이페이지</title>
+  <link rel="stylesheet" href="../resources/css/setting.css">
+  <link rel="stylesheet" href="../resources/css/plugin.css">
+  <link rel="stylesheet" href="../resources/css/template.css">
+  <link rel="stylesheet" href="../resources/css/style.css">
+
+	<script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+  <script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
+</head>
+
+<body>
+<div class="campland-N14" data-bid="chatting">
+	<div class="contents-container container-md">
+		<div id="chattingRoom">
+			<!-- 채팅방 -->
+
+		</div>
+	</div>
+</div>
+  <!-- [S]campland-N1 -->
+  <header class="campland-N1" data-bid="KcLyI3r0UT">
+    <div class="header-inner">
+      <div class="header-container container-lg">
+        <div class="header-left">
+          <h1 class="header-title">
+            <a href="/main">
+              <img src="/resources/images/pushtrip_logo.png" alt="로고">
+            </a>
+          </h1>
+        </div>
+        <div class="header-center">
+          <ul class="header-member">
+            <li>
+              <a href="/loginForm">로그인</a>
+            </li>
+            <li>
+              <a href="/join">회원가입</a>
+            </li>
+          </ul>
+          <ul class="header-gnblist">
+            <li class="header-gnbitem">
+              <a class="header-gnblink" href="javascript:void(0)">
+                <span>여행</span>
+              </a>
+              <ul class="header-sublist">
+                <li class="header-subitem">
+                  <a class="header-sublink" href="introduction">
+                    <span>소개</span>
+                  </a>
+                </li>
+                <li class="header-subitem">
+                  <a class="header-sublink" href="Top5">
+                    <span>추천여행</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="header-gnbitem">
+              <a class="header-gnblink" href="javascript:void(0)">
+                <span>게시판</span>
+              </a>
+              <ul class="header-sublist">
+                <li class="header-subitem">
+                  <a class="header-sublink" href="freeForumSelectAll">
+                    <span>자유게시판</span>
+                  </a>
+                </li>
+                <li class="header-subitem">
+                  <a class="header-sublink" href="travelForumSelectAll">
+                    <span>여행게시판</span>
+                  </a>
+                </li>
+                <li class="header-subitem">
+                  <a class="header-sublink" href="tradeForumSelectAll">
+                    <span>중고거래</span>
+                  </a>
+                </li>
+              </ul>
+            <li class="header-gnbitem">
+              <a class="header-gnblink" href="javascript:void(0)">
+                <span>공지사항</span>
+              </a>
+              <ul class="header-sublist">
+                <li class="header-subitem">
+                  <a class="header-sublink" href="noticeForumSelectAll">
+                    <span>공지사항</span>
+                  </a>
+                </li>
+                <li class="header-subitem">
+                  <a class="header-sublink" href="questionForumSelectAll">
+                    <span>문의사항</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="header-right">
+          <div class="header-utils">
+            <a id="profileContainer" class="header-utils">
+            </a>
+            <a href="/mypage" class="btn-profile header-utils-btn">
+              <img src="/resources/icons/ico_profile_black.svg" alt="마이페이지">
+              <span class="tooltip-text">마이페이지</span>
+            </a>
+            <a href="javascript:void(0)" onclick="openMessagePopup()" class="btn-profile header-utils-btn">
+              <img  src="resources/images/free-icon-message-5941217.png" alt="쪽지함 아이콘">
+              <span class="tooltip-text">쪽지함</span>
+            </a>
+          </div>
+        </div>
+      </div>
+        <button class="fullmenu-close">
+          <img src="/resources/icons/ico_close_m_white.svg" alt="닫기">
+        </button>
+      </div>
+    </div>
+  </header>
+  <!-- [E]campland-N1 -->
+  <main class="th-layout-main ">
+  	<!-- 사진 수정창 -->
+	<div id="modal-photo" class="modal-name">
+	    <div class="modal-content" style="height: 300px">
+	        <span class="close-button" onclick="closeModal('modal-photo')">&times;</span>
+	        <h2><strong><span id="userName2">Loading...</span>님</strong>의 새로운 <span class="highlight">프로필 사진</span>을 입력해주세요</h2>
+	        <br>
+	        <form action="/updateUser" method="post" enctype="multipart/form-data">
+				<input id="userInput" name="userId" type="hidden">
+	            <div class="imageset1" style="position: relative; height: 110px;">
+			        <img id="userPicture1" alt="프로필 이미지" style="width: 100px; height: 100px; border-radius: 50%; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);" >
+			    </div>
+			    <div class="inputset inputset-round" style="margin-bottom: 10px">
+                  사진변경 : <input type="file"  id="new_picture" name="new_picture" accept="images/*" aria-label="사진" value="사진변경">
+                </div>
+	            <div style="display: flex; justify-content: space-between;">
+	                <a class="btnset btnset-round btnset-line btnset-black" type="button" onclick="closeModal('modal-photo')" style="width: 165px; margin-top: 0px;">취소</a>
+	                <button type="submit" class="btnset btnset-round" style="width: 165px; margin-top: 0px;">수정</button>
+	            </div>
+	        </form>
+	    </div>
+	</div>
+  
+  	<!-- 이름 수정창 -->
+	<div id="modal-name" class="modal-name">
+	    <div class="modal-content">
+	        <span class="close-button" onclick="closeModal('modal-name')">&times;</span>
+	        <h2><strong><span id="userName3">Loading...</span>님</strong>의 새로운 <span class="highlight">이름</span>을 입력해주세요</h2>
+	        <br>
+	        <form action="/updateUserN" method="post" enctype="multipart/form-data">
+				<input id="userInput1" name="userId" type="hidden" >
+	            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+	                <img src="../resources/images/my.png" alt="이름 아이콘" style="width: 24px; height: 24px; margin-right: 8px;">
+	                <p style="margin: 0;"><span id="userName4">Loading...</span></p>
+	            </div>
+	            <div style="margin-bottom: 20px;">
+	                <input type="text" id="name" name="name" placeholder="새로운 이름을 입력해주세요." style="width: 100%; padding: 8px; margin-top: 5px;" class="address-input">
+	            </div>
+	            <div style="display: flex; justify-content: space-between;">
+	                <a class="btnset btnset-round btnset-line btnset-black" type="button" onclick="closeModal('modal-name')" style="width: 165px; margin-top: 0px;">취소</a>
+	                <button type="submit" class="btnset btnset-round" style="width: 165px; margin-top: 0px;">수정</button>
+	            </div>
+	        </form>
+	    </div>
+	</div>
+	
+	<!-- 전화번호 수정창 -->
+	<div id="modal-phone" class="modal-name">
+		<div class="modal-content">
+			<span class="close-button" onclick="closeModal('modal-phone')">&times;</span>
+			<h2><strong><span id="userName5">Loading...</span>님</strong>의 새로운 <span class="highlight">전화번호</span>를 입력해주세요</h2>
+			<br>
+			<form id="updatePhoneForm" action="/updateUserT" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+				<input id="userInput2" name="userId" type="hidden">
+				<div style="display: flex; align-items: center; margin-bottom: 10px;">
+					<img src="../resources/images/phone.png" alt="전화번호 아이콘" style="width: 24px; height: 24px; margin-right: 8px;">
+					<p style="margin: 0;"><span id="userTel1">Loading...</span></p>
+				</div>
+				<div style="margin-bottom: 20px;">
+					<input type="text" id="tel" name="tel" placeholder="새로운 전화번호를 입력해주세요." style="width: 100%; padding: 8px; margin-top: 5px;" class="address-input">
+					<span id="error-message" style="color: red; display: none;">전화번호를 올바르게 입력해주세요.</span>
+				</div>
+				<div style="display: flex; justify-content: space-between;">
+					<a class="btnset btnset-round btnset-line btnset-black" type="button" onclick="closeModal('modal-phone')" style="width: 165px; margin-top: 0px;">취소</a>
+					<button type="submit" class="btnset btnset-round" style="width: 165px; margin-top: 0px;">수정</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<!-- 이메일 수정창 -->
+	<div id="modal-email" class="modal-name">
+		<div class="modal-content">
+			<span class="close-button" onclick="closeModal('modal-email')">&times;</span>
+			<h2><strong><span id="userName6">Loading...</span>님</strong>의 새로운 <span class="highlight">이메일</span>을 입력해주세요</h2>
+			<br>
+			<form id="updateEmailForm" action="/updateUserE" method="post" enctype="multipart/form-data" onsubmit="return validateEmailForm()">
+				<input id="userInput3" name="userId" type="hidden">
+				<div style="display: flex; align-items: center; margin-bottom: 10px;">
+					<img src="../resources/images/email.png" alt="이메일 아이콘" style="width: 24px; height: 24px; margin-right: 8px;">
+					<p style="margin: 0;"><span id="userEmail2">Loading...</span></p>
+				</div>
+				<div style="margin-bottom: 20px;">
+					<input type="text" id="email" name="email" placeholder="새로운 이메일을 입력해주세요." style="width: 100%; padding: 8px; margin-top: 5px;" class="address-input">
+					<span id="email-error-message" style="color: red; display: none;">유효한 이메일 주소를 입력해주세요.</span>
+				</div>
+				<div style="display: flex; justify-content: space-between;">
+					<a class="btnset btnset-round btnset-line btnset-black" type="button" onclick="closeModal('modal-email')" style="width: 165px; margin-top: 0px;">취소</a>
+					<button type="submit" class="btnset btnset-round" style="width: 165px; margin-top: 0px;">수정</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<!-- 생년월일 수정창 -->
+	<div id="modal-birth" class="modal-name">
+		<div class="modal-content">
+			<span class="close-button" onclick="closeModal('modal-birth')">&times;</span>
+			<h2><strong><span id="userName7">Loading...</span>님</strong>의 새로운 <span class="highlight">생년월일</span>을 입력해주세요</h2>
+			<br>
+			<form action="/updateUserB" method="post" enctype="multipart/form-data" onsubmit="return validateBirthForm()">
+				<input id="userInput4" name="userId" type="hidden">
+				<div style="display: flex; align-items: center; margin-bottom: 10px;">
+					<img src="../resources/images/birth.png" alt="이름 아이콘" style="width: 24px; height: 24px; margin-right: 8px;">
+					<p style="margin: 0;"><span id="userBirth1">Loading...</span></p>
+				</div>
+				<div style="margin-bottom: 20px;">
+					<input type="text" id="birth" name="birth" placeholder="새로운 생년월일을 입력해주세요." style="width: 100%; padding: 8px; margin-top: 5px;" class="address-input">
+					<div id="birth-error-message" style="display: none; color: red; margin-top: 10px;"></div>
+				</div>
+				<div style="display: flex; justify-content: space-between;">
+					<a class="btnset btnset-round btnset-line btnset-black" type="button" onclick="closeModal('modal-birth')" style="width: 165px; margin-top: 0px;">취소</a>
+					<button type="submit" class="btnset btnset-round" style="width: 165px; margin-top: 0px;">수정</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<!-- 비밀번호 수정창 -->
+	<div id="modal-password" class="modal-name">
+		<div class="modal-content" style="height: 470px">
+			<span class="close-button" onclick="closeModal('modal-password')">&times;</span>
+			<h2><strong><span id="userName9">Loading...</span>님 </strong><span class="highlight">비밀번호</span>를 변경하시려면 기존 <span class="highlight">아이디</span>를 입력해주세요</h2>
+			<br>
+			<div style="margin-bottom: 20px;">
+				<input type="text" id="idCheck" name="idCheck" placeholder="기존 아이디를 입력해주세요." style="width: calc(100% - 80px); padding: 8px; margin-top: 5px;" class="address-input">
+				<button type="button" onclick="checkid()" style="width: 60px; padding: 8px; margin-top: 5px; margin-left: 10px; cursor: pointer;">확인</button>
+				<div id="id-error-message" style="display: none; color: red; margin-top: 10px;"></div>
+			</div>
+			<form action="/updateUserP" method="post" enctype="multipart/form-data" class="form-container-password" onsubmit="return validatePasswordForm();">
+				<input id="userInput7" name="userId" type="hidden">
+				<div style="display: flex; align-items: center; margin-bottom: 10px;">
+					<img src="../resources/images/password.png" alt="비밀번호 아이콘" style="width: 24px; height: 24px; margin-right: 8px;">
+				</div>
+				<div style="margin-bottom: 20px;">
+					<input type="password" id="password" name="password" placeholder="새로운 비밀번호를 입력해주세요." style="width: 100%; padding: 8px; margin-top: 5px;" class="address-input">
+				</div>
+				<div style="margin-bottom: 20px;">
+					<input type="password" id="password-C" name="password-C" placeholder="비밀번호 확인" style="width: calc(100% - 80px); padding: 8px; margin-top: 5px;" class="address-input">
+					<button type="button" onclick="checkPassword()" style="width: 60px; padding: 8px; margin-top: 5px; margin-left: 10px; cursor: pointer;">확인</button>
+				</div>
+				<div id="password-error-message" style="display: none; color: red; margin-bottom: 20px;"></div>
+				<div id="password-success-message" style="display: none; color: gray; margin-bottom: 20px;"></div> <!-- Added success message div -->
+				<div style="display: flex; justify-content: space-between;">
+					<a class="btnset btnset-round btnset-line btnset-black" type="button" onclick="closeModal('modal-password')" style="width: 165px; margin-top: 0px;">취소</a>
+					<button type="submit" class="btnset btnset-round" style="width: 165px; margin-top: 0px;">수정</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<!-- 주소 수정창 -->
+	<div class="campland-N26">
+		<div id="modal-addr" class="modal-name">
+			<div class="modal-content" style="height: 440px;">
+				<span class="close-button" onclick="closeModal('modal-addr')">&times;</span>
+				<h2><strong><span id="userName11">Loading...</span>님</strong>의 새로운 <span class="highlight">주소</span>를 입력해주세요</h2>
+				<br>
+				<form id="address-form" action="/updateUserA" method="post" enctype="multipart/form-data" onsubmit="return validateAddressForm()">
+					<input id="userInput6" name="userId" type="hidden">
+					<p style="margin: 0; display: flex; align-items: center;">
+						<img src="../resources/images/shipping.png" alt="주소 아이콘" style="width: 24px; height: 24px; margin-right: 8px;">
+						<p style="margin: 0;"><span id="userRoadAddr1">Loading...</span> (<span id="userJibunAddr1">Loading...</span>) <span id="userRoadDetail1">Loading...</span> (<span id="userZoneCode1">Loading...</span>)</p>
+					</p>
+					<div class="wnth" style="margin-bottom: 20px; gap: 10px;">
+						<div class="wnth2" style="display: flex; flex-direction: column; justify-content: center;">
+							<div class="wnth3" style="display: flex; justify-content: space-between;">
+								<input type="text" id="zoneCode" name="zoneCode" placeholder="우편번호" readonly class="address-input" style="margin-bottom: 10px">
+								<button type="button" id="search-address-btn" style="width: 100px; margin: 10px">주소 찾기</button>
+							</div>
+							<div class="address-container">
+								<input type="text" id="roadAddr" name="roadAddr" placeholder="도로명주소" readonly class="address-input">
+								<input type="text" id="roadDetail" name="roadDetail" placeholder="상세주소" class="address-input">
+								<input type="text" id="jibunAddr" name="jibunAddr" placeholder="지번주소" readonly class="address-input">
+							</div>
+							<!-- 에러 메시지를 표시할 요소 추가 -->
+							<p id="address-error-message" style="color: red; display: none; margin-top: 10px;"></p>
+						</div>
+					</div>
+					<div style="display: flex; justify-content: space-between;">
+						<a class="btnset btnset-round btnset-line btnset-black" type="button" onclick="closeModal('modal-addr')" style="width: 165px; margin-top: 0px;">취소</a>
+						<button type="submit" class="btnset btnset-round" style="width: 165px; margin-top: 0px;">수정</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+    <!-- [S]campland-N23 -->
+    <div class="campland-N230">
+      <div class="contents-inner">
+        <div class="contents-container">
+          <div class="textset textset-sub textset-center" style="margin-bottom: 60px;">
+		    <div class="imageset1" style="position: relative; height: 110px;">
+		        <img src="../resources/images/rjqnr.png" alt="프로필 이미지" style="width: 100px; height: 100px; border-radius: 50%; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);" id="userPicture">
+		        <a onclick="openModal('modal-photo')" class="contents-button1" style="position: absolute; width: 24px; height: 24px; top: 70px; left: 447px;"  >
+		            <img src="../resources/images/free-icon-edit-button-5253658.png" alt="글쓰기 아이콘" style="width: 30px; height: 30px;" >
+		        </a>
+		        <h2 class="contents-names" style="margin-top: 5px;"><span id="userName">Loading...</span></h2>
+		        <p class="contents-text"><span id="userEmail1">Loading...</span></p>
+		    </div>
+		</div>
+		<br>
+		<h3 style="font-weight: bold; margin: 0;">내 프로필</h3>
+		<div style="background-color: white; border-radius: 20px; border: 2px solid #6699FF; display: flex; flex-direction: column; padding: 10px; width: 840px;">
+		    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+		        <p style="margin-left: 5px; font-weight: bold;">기본정보</p>
+		    </div>
+		    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+			    <p style="margin: 0; display: flex; align-items: center;">
+			        <img src="../resources/images/my.png" alt="이름 아이콘" style="width: 24px; height: 24px; margin-right: 8px;">
+			        <span id="userName1">Loading...</span>
+			    </p>
+			    <a onclick="openModal('modal-name')" class="edit-button" style="font-size: 24px; color: #6699FF; text-decoration: none;">&#9998;</a>
+			</div>
+			<hr>
+			<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+			    <p style="margin: 0; display: flex; align-items: center;">
+			        <img src="../resources/images/phone.png" alt="전화번호 아이콘" style="width: 24px; height: 24px; margin-right: 8px;">
+			        <span id="userTel">Loading...</span>
+			    </p>
+			    <a onclick="openModal('modal-phone')" class="edit-button" style="font-size: 24px; color: #6699FF; text-decoration: none;">&#9998;</a>
+			</div>
+		    <hr>
+		    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+		        <p style="margin: 0; display: flex; align-items: center;">
+		            <img src="../resources/images/email.png" alt="이메일 아이콘" style="width: 24px; height: 24px; margin-right: 8px;">
+		            <span id="userEmail">Loading...</span>
+		        </p>
+		        <a onclick="openModal('modal-email')" class="edit-button" style="font-size: 24px; color: #6699FF; text-decoration: none;">&#9998;</a>
+		    </div>
+		    <hr>
+		    <div style="display: flex; align-items: center; justify-content: space-between;">
+		        <p style="margin: 0; display: flex; align-items: center;">
+		            <img src="../resources/images/birth.png" alt="생년월일 아이콘" style="width: 24px; height: 24px; margin-right: 8px;">
+		            <span id="userBirth">Loading...</span>
+		        </p>
+		        <a onclick="openModal('modal-birth')" class="edit-button" style="font-size: 24px; color: #6699FF; text-decoration: none;">&#9998;</a>
+		    </div>
+		</div>
+		<br>
+		<h3 style="font-weight: bold; margin: 0;">부가정보관리</h3>
+		<div style="background-color: white; border-radius: 20px; border: 2px solid #6699FF; display: flex; flex-direction: column; padding: 10px; height: 60px; width: 840px;">
+		    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+		        <p style="margin: 0; display: flex; align-items: center;">
+			        <img src="../resources/images/shipping.png" alt="이름 아이콘" style="width: 24px; height: 24px; margin-right: 8px;">
+			        배송지 관리
+		   		</p>
+		        <a onclick="toggleHiddenContent()" class="contents-notice-link" style="font-size: 40px; color: white; width: 24px; text-decoration: none;">&#x270E;</a>
+		    </div>
+		</div>
+		<br>
+		<div id="hiddenContent" style="display: none;">
+		    <div style="background-color: white; border-radius: 20px; border: 2px solid #CCCCCC; display: flex; flex-direction: column; padding: 10px; width: 840px;">
+		        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+		            <p style="margin-left: 5px; font-weight: bold;">배송지 목록</p>
+		            <a onclick="openModal('modal-addr')" class="edit-button" style="font-size: 24px; color: #6699FF; text-decoration: none;">&#9998;</a>
+		        </div>
+		        <div style="display: flex; flex-direction: column; margin-bottom: 10px;">
+					<div style="display: flex; align-items: center; margin-bottom: 5px;">
+						<span style="width: 100px; font-weight: bold;">이  름:</span>
+						<p style="margin: 0; flex: 1;"><span id="userName10">Loading...</span></p>
+					</div>
+					<div style="display: flex; align-items: center; margin-bottom: 5px;">
+						<span style="width: 100px; font-weight: bold;">전화번호:</span>
+						<p style="margin: 0; flex: 1;"><span id="userTel2">Loading...</span></p>
+					</div>
+					<div style="display: flex; align-items: center;">
+						<span style="width: 100px; font-weight: bold;">주  소:</span>
+						<p style="margin: 0; flex: 1;">
+							<span id="userRoadAddr">Loading...</span>
+							(<span id="userJibunAddr">Loading...</span>)
+							<span id="userRoadDetail">Loading...</span>
+							(<span id="userZoneCode">Loading...</span>)
+						</p>
+					</div>
+				</div>
+		    </div>
+		</div>
+		<br>
+		<h3 style="font-weight: bold; margin: 0;">보안설정</h3>
+		<div style="background-color: white; border-radius: 20px; border: 2px solid #6699FF; display: flex; flex-direction: column; padding: 10px; width: 840px;">
+		    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+		        <p style="margin-left: 5px; font-weight: bold;">기존보안설정</p>
+		    </div>
+		    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+		        <p style="margin: 0; display: flex; align-items: center;">
+		            <img src="../resources/images/password.png" alt="비밀번호 아이콘" style="width: 24px; height: 24px; margin-right: 8px;">
+		            비밀번호 변경
+		        </p>
+		        <a onclick="openModal('modal-password')" class="edit-button" style="font-size: 24px; color: #6699FF; text-decoration: none;">&#9998;</a>
+		    </div>
+		</div>
+		<div style="margin: 20px; display: flex; justify-content: center;">
+			<form action="/deleteUser" method="post" enctype="multipart/form-data" style="display:inline;" onsubmit="return confirmDelete()">
+              <input id="userInput8" name="userId" type="hidden">
+              <button type="submit" class="btnset btnset-round btnset-line btnset-black">회원탈퇴</button>
+            </form>
+		</div>
+  </main>
+  <!-- [S]campland-N2 -->
+  <footer class="campland-N2" data-bid="HKlyI3r1MZ">
+    <div class="footer-container container-lg">
+        <div class="footer-top">
+            <h1 class="footer-logo">
+                <a href="javascript:void(0)">
+                    <img src="resources/images/pushtrip_logo_white.png" alt="로고">
+                </a>
+            </h1>
+            <ul class="footer-menulist">
+                <li class="footer-menuitem">
+                    <a href="javascript:void(0)">
+                        <span>이용약관</span>
+                    </a>
+                </li>
+                <li class="footer-menuitem">
+                    <a href="javascript:void(0)">
+                        <span>개인정보처리방침</span>
+                    </a>
+                </li>
+                <li class="footer-menuitem">
+                    <a href="javascript:void(0)">
+                        <span>푸터메뉴1</span>
+                    </a>
+                </li>
+                <li class="footer-menuitem">
+                    <a href="javascript:void(0)">
+                        <span>푸터메뉴2</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="footer-snslist">
+                <li class="footer-snsitem">
+                    <a class="footer-snslink" href="javascript:void(0)">
+                        <img src="resources/icons/ico_instagram_lightgrey.svg" alt="인스타그램">
+                    </a>
+                </li>
+                <li class="footer-snsitem">
+                    <a class="footer-snslink" href="javascript:void(0)">
+                        <img src="resources/icons/ico_youtube_lightgrey.svg" alt="유튜브">
+                    </a>
+                </li>
+                <li class="footer-snsitem">
+                    <a class="footer-snslink" href="javascript:void(0)">
+                        <img src="resources/icons/ico_facebook_lightgrey.svg" alt="페이스북">
+                    </a>
+                </li>
+                <li class="footer-snsitem">
+                    <a class="footer-snslink" href="javascript:void(0)">
+                        <img src="resources/icons/ico_kakao_lightgrey.svg" alt="카카오톡">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <h2 class="footer-logo">
+                <a href="javascript:void(0)">
+                    <img src="resources/images/pushtrip_logo_white.png" alt="로고">
+                </a>
+            </h2>
+            <div class="footer-txt">
+                <p> 서울시 금천구 벚꽃로36길 30 가산 KS타워 1409호 </p>
+                <p>
+                    <span>T. 070-8872-8874</span>
+                    <span>E. help@openfield.co.kr</span>
+                </p>
+            </div>
+            <div class="footer-txt">
+                <p>2022 BY TEMPLATEHOUSE. ALL RIGHTS RESEVED</p>
+            </div>
+        </div>
+    </div>
+</footer>
+  <!-- [E]campland-N2 -->
+  <script src="resources/js/setting.js"></script>
+  <script src="resources/js/plugin.js"></script>
+  <script src="resources/js/template.js"></script>
+  <script src="resources/js/script_mypage.js"></script>
+  <script src="resources/js/script_mypage_update.js"></script>
+  <script src="/resources/js/chat.js"></script>
+  <script src="/resources/js/chatbot.js"></script>
+<script src="/resources/js/openMessage.js"></script>
+</body>

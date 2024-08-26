@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="imagetoolbar" content="no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="title" content="웹사이트">
+  <meta name="description" content="웹사이트입니다.">
+  <meta name="keywords" content="키워드,키워드,키워드">
+  <meta property="og:title" content="웹사이트">
+  <meta property="og:description" content="웹사이트입니다">
+  <meta property="og:image" content="https://웹사이트/../resources/images/opengraph.png">
+  <meta property="og:url" content="https://웹사이트">
+  <title>pushtrip join_membership</title>
+  <link rel="stylesheet" th:href="@{/resources/css/setting.css}">
+  <link rel="stylesheet" th:href="@{/resources/css/plugin.css}">
+  <link rel="stylesheet" th:href="@{/resources/css/template.css}">
+  <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+
+  <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+  <script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
+<style>
+  .contents-item {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.error-message {
+  position: absolute; /* 에러 메시지를 절대 위치로 설정 */
+  color: red;
+  font-size: 0.875em; /* 에러 메시지 크기 조정 */
+  margin-top: 1px; /* 에러 메시지와 입력 필드 간의 간격 조정 */
+  top: 100%; /* 입력 필드 바로 아래에 위치 */
+  width: 100%; /* 입력 필드와 같은 너비로 설정 */
+}
+
+.success-message {
+  position: absolute; /* 에러 메시지를 절대 위치로 설정 */
+  color: gray;
+  font-size: 0.875em; /* 에러 메시지 크기 조정 */
+  margin-top: 1px; /* 에러 메시지와 입력 필드 간의 간격 조정 */
+  top: 100%; /* 입력 필드 바로 아래에 위치 */
+  width: 100%; /* 입력 필드와 같은 너비로 설정 */
+}
+
+  .inputset-input {
+  min-height: 30px; /* 입력 필드의 최소 높이 설정 */
+  box-sizing: border-box; /* 패딩과 테두리 포함 */
+}
+</style>
+</head>
+
+<body>
+<header class="campland-N1" data-bid="KcLyI3r0UT">
+    <div class="header-inner">
+      <div class="header-container container-lg">
+        <div class="header-left">
+          <h1 class="header-title">
+            <a href="/main">
+              <img src="/resources/images/pushtrip_logo.png" alt="로고">
+            </a>
+          </h1>
+        </div>
+        <div class="header-center">
+          <ul class="header-member">
+            <li>
+              <a href="/loginForm">로그인</a>
+            </li>
+            <li>
+              <a href="/join">회원가입</a>
+            </li>
+          </ul>
+          <ul class="header-gnblist">
+            <li class="header-gnbitem">
+              <a class="header-gnblink" href="javascript:void(0)">
+                <span>여행</span>
+              </a>
+              <ul class="header-sublist">
+                <li class="header-subitem">
+                  <a class="header-sublink" href="introduction">
+                    <span>소개</span>
+                  </a>
+                </li>
+                <li class="header-subitem">
+                  <a class="header-sublink" href="Top5">
+                    <span>추천여행</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="header-gnbitem">
+              <a class="header-gnblink" href="javascript:void(0)">
+                <span>게시판</span>
+              </a>
+              <ul class="header-sublist">
+                <li class="header-subitem">
+                  <a class="header-sublink" href="freeForumSelectAll">
+                    <span>자유게시판</span>
+                  </a>
+                </li>
+                <li class="header-subitem">
+                  <a class="header-sublink" href="travelForumSelectAll">
+                    <span>여행게시판</span>
+                  </a>
+                </li>
+                <li class="header-subitem">
+                  <a class="header-sublink" href="tradeForumSelectAll">
+                    <span>중고거래</span>
+                  </a>
+                </li>
+              </ul>
+            <li class="header-gnbitem">
+              <a class="header-gnblink" href="javascript:void(0)">
+                <span>공지사항</span>
+              </a>
+              <ul class="header-sublist">
+                <li class="header-subitem">
+                  <a class="header-sublink" href="noticeForumSelectAll">
+                    <span>공지사항</span>
+                  </a>
+                </li>
+                <li class="header-subitem">
+                  <a class="header-sublink" href="questionForumSelectAll">
+                    <span>문의사항</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="header-right">
+          <div class="header-utils">
+            <a id="profileContainer" class="header-utils">
+            </a>
+            <a href="/mypage" class="btn-profile header-utils-btn">
+              <img src="/resources/icons/ico_profile_black.svg" alt="마이페이지">
+              <span class="tooltip-text">마이페이지</span>
+            </a>
+            <a href="javascript:void(0)" onclick="openMessagePopup()" class="btn-profile header-utils-btn">
+              <img  src="resources/images/free-icon-message-5941217.png" alt="쪽지함 아이콘">
+              <span class="tooltip-text">쪽지함</span>
+            </a>
+          </div>
+        </div>
+      </div>
+        <button class="fullmenu-close">
+          <img src="/resources/icons/ico_close_m_white.svg" alt="닫기">
+        </button>
+      </div>
+    </div>
+  </header>
+
+<main class="th-layout-main">
+  <form th:action="@{/insert}" th:object="${user}" method="post" enctype="multipart/form-data">
+    <div class="campland-N25" data-bid="kIlyiBoUVN">
+      <div class="contents-inner">
+        <div class="contents-container">
+          <div class="textset textset-sub textset-center">
+            <h2 class="textset-tit">회원가입</h2>
+          </div>
+          <ul class="contents-list">
+            <li class="contents-item">
+              <h6 class="form-tit form-tit-deco"><span style="background-color: #99CCFF;"></span>이름</h6>
+              <div class="form-wrap">
+                <div class="inputset inputset-round">
+                  <input type="text" th:field="*{name}" class="inputset-input form-control" aria-label="이름" placeholder="이름을 입력해주세요.">
+                  <div class="error-message" id="name-error"></div>
+                </div>
+              </div>
+            </li>
+            <li class="contents-item">
+              <h6 class="form-tit form-tit-deco"><span style="background-color: #99CCFF;"></span>아이디</h6>
+              <div class="form-wrap">
+                <div class="inputset inputset-round">
+                  <input type="text" id="userId" th:field="*{userId}" class="inputset-input form-control" aria-label="아이디" placeholder="아이디를 입력해주세요.">
+                  <div class="error-message" id="userId-error"></div>
+                  <div class="success-message" id="userId-success"></div>
+                </div>
+                <button type="button" id="idCheck" class="btnset " style="border: 1px solid #6699FF;" >중복확인</button>
+              </div>
+            </li>
+            <li class="contents-item">
+              <h6 class="form-tit form-tit-deco"><span style="background-color: #99CCFF;"></span>비밀번호</h6>
+              <div class="form-wrap">
+                <div class="inputset inputset-round">
+                  <input type="password" th:field="*{password}" class="inputset-input form-control" aria-label="비밀번호" placeholder="영문 대소문자/숫자/특수문자 포함 10~16자">
+                  <div class="error-message" id="password-error"></div>
+                </div>
+              </div>
+            </li>
+            <li class="contents-item">
+              <h6 class="form-tit form-tit-deco"><span style="background-color: #99CCFF;"></span>비밀번호 확인</h6>
+              <div class="form-wrap">
+                <div class="inputset inputset-round">
+                  <input type="password" name="confirmPassword" id="confirmPassword" class="inputset-input form-control" aria-label="비밀번호 확인" placeholder="비밀번호를 다시 입력해주세요.">
+                  <div class="error-message" id="confirmPassword-error"></div>
+                  <div class="success-message" id="confirmPassword-success"></div>
+                </div>
+              </div>
+            </li>
+            <li class="contents-item">
+              <h6 class="form-tit form-tit-deco"><span style="background-color: #99CCFF;"></span>휴대폰 번호</h6>
+              <div class="form-wrap">
+                <div class="inputset inputset-round">
+                  <input type="text" id="tel" th:field="*{tel}" class="inputset-input form-control" aria-label="휴대폰 번호" placeholder="- 없이 입력해주세요.">
+                  <div class="error-message" id="send-phone-code-error"></div>
+                  <div class="success-message" id="send-phone-code-success"></div>
+                </div>
+                <button type="button" id="send-phone-code" class="btnset" style="border: 1px solid #6699FF;">인증번호 발송</button>
+              </div>
+            </li>
+            <li class="contents-item">
+              <h6 class="form-tit form-tit-deco"><span style="background-color: #99CCFF;"></span>인증번호</h6>
+              <div class="form-wrap">
+                <div class="inputset inputset-round">
+                  <input type="text" id="phone-code"  class="inputset-input form-control" aria-label="인증번호" placeholder="인증번호를 입력해주세요">
+                  <div class="error-message" id="phone-code-error"></div>
+                  <div class="success-message" id="phone-code-success"></div>
+                </div>
+                <button type="button" id="verify-phone-code" class="btnset" style="border: 1px solid #6699FF;">확인</button>
+              </div>
+            </li>
+            <em style="display: block; text-align: center; width: 100%;padding-left: 90px;">-이메일 선택-</em>
+            <li class="contents-item">
+              <h6 class="form-tit form-tit-deco"><span style="background-color: #99CCFF;"></span>이메일</h6>
+              <div class="form-wrap">
+                <div class="inputset inputset-round">
+                  <input type="text" id ="email-input" th:field="*{email}" class="inputset-input form-control" aria-label="이메일" placeholder="이메일을 입력해주세요.">
+                  <div class="error-message" id="email-error"></div>
+                  <div class="success-message" id="email-success"></div>
+                </div>
+                <div class="selectset selectset-round">
+                  <button class="selectset-toggle btn" type="button">
+                    <span>직접입력</span>
+                  </button>
+                  <ul class="selectset-list">
+                    <li class="selectset-item">
+                      <button class="selectset-link btn email-button" type="button" data-value="naver.com">
+                        <span>naver.com</span>
+                      </button>
+                    </li>
+                    <li class="selectset-item">
+                      <button class="selectset-link btn email-button" type="button" data-value="google.com">
+                        <span>google.com</span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+                <button type="button" id="emailCheck" class="btnset " style="border: 1px solid #6699FF;" >중복확인</button>
+              </div>
+            </li>
+            <li class="contents-item">
+              <h6 class="form-tit form-tit-deco"><span style="background-color: #99CCFF;"></span>성별</h6>
+              <div class="form-wrap">
+                <input type="hidden" th:field="*{gender}" id="gender">
+                <div class="selectset selectset-round">
+                  <button class="selectset-toggle btn" type="button">
+                    <span>선택해주세요</span>
+                  </button>
+                  <ul class="selectset-list">
+                    <li class="selectset-item">
+                      <button class="selectset-link btn gender-button" type="button" data-value="남자">
+                        <span>남자</span>
+                      </button>
+                    </li>
+                    <li class="selectset-item">
+                      <button class="selectset-link btn gender-button" type="button" data-value="여자">
+                        <span>여자</span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+                <div class="error-message" id="gender-error"></div>
+              </div>
+            </li>
+            <li class="contents-item">
+              <h6 class="form-tit form-tit-deco"><span style="background-color: #99CCFF;"></span>생년월일</h6>
+              <div class="form-wrap">
+                <div class="inputset inputset-round">
+                  <input type="text" th:field="*{birth}" class="inputset-input form-control" aria-label="생년월일" placeholder="YYYY-MM-DD 형식으로 입력해주세요.">
+                  <div class="error-message" id="birth-error"></div>
+                </div>
+              </div>
+            </li>
+            <li class="contents-item">
+              <h6 class="form-tit form-tit-deco"><span style="background-color: #99CCFF;"></span>주소</h6>
+              <div class="form-wrap">
+                <div class="inputset inputset-round">
+                  <input type="text" th:field="*{zoneCode}" class="inputset-input form-control" id="zonecode" placeholder="우편번호">
+                  <div class="error-message" id="zoneCode-error"></div>
+                  <input type="button" name="zonecode_1" id="zonecode_1" value="우편번호 찾기"><br>
+                  <input type="text" th:field="*{roadAddr}" class="inputset-input form-control" id="roadaddr" placeholder="도로명주소"><br>
+                  <input type="text" th:field="*{roadDetail}" class="inputset-input form-control" id="roaddetail" placeholder="도로명주소 상세주소"><br>
+                  <input type="text" th:field="*{jibunAddr}" class="inputset-input form-control" id="jibunaddr" placeholder="지번주소">
+                </div>
+              </div>
+            </li>
+            <li class="contents-item">
+              <h6 class="form-tit form-tit-deco"><span style="background-color: #99CCFF;"></span>프로필 사진</h6>
+              <div class="form-wrap">
+                <div class="inputset inputset-round">
+                  <input type="file" id="picture" name="picture" class="form-control-file" aria-label="사진">
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div class="contents-bottom">
+            <h2 class="contents-tit">개인정보수집 및 이용동의</h2>
+            <div class="contents-board"> - 수집하는 개인정보 항목 : 이메일 <br> 작성해주시는 개인 정보는 문의 접수 및 고객 불만 해결을 위해 5년간 보관됩니다. 이용자는 본 동의를 거부할 수 있으나, 미동의시 문의 접수가 불가능합니다. </div>
+            <div class="checkset">
+              <input id="checkset-a-1-1" class="checkset-input input-fill input-round" type="checkbox" value="">
+              <label class="checkset-label" for="checkset-a-1-1"></label>
+              <span class="checkset-text">위 내용을 읽었으며, 내용에 동의합니다. <em class="checkset-acc" style="color: #99CCFF;">(필수)</em>
+              </span>
+              <div class="error-message" id="terms-error"></div>
+            </div>
+          </div>
+          <div class="contents-confirm">
+            <a class="btnset btnset-round btnset-line btnset-black" th:href="@{/somePage}">돌아가기</a>
+            <button type="submit" class="btnset btnset-round" style="border: 1px solid #6699FF;"  id="submit-btn">가입완료</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</main>
+
+<footer class="campland-N2" data-bid="eZLyIBOUzK">
+  <div class="footer-container container-lg">
+    <div class="footer-top">
+      <h1 class="footer-logo">
+        <a href="javascript:void(0)">
+          <img th:src="@{/resources/images/pushtrip_logo_white.png}" alt="로고">
+        </a>
+      </h1>
+      <ul class="footer-menulist">
+        <li class="footer-menuitem"><a href="javascript:void(0)"><span>이용약관</span></a></li>
+        <li class="footer-menuitem"><a href="javascript:void(0)"><span>개인정보처리방침</span></a></li>
+        <li class="footer-menuitem"><a href="javascript:void(0)"><span>푸터메뉴1</span></a></li>
+        <li class="footer-menuitem"><a href="javascript:void(0)"><span>푸터메뉴2</span></a></li>
+      </ul>
+      <ul class="footer-snslist">
+        <li class="footer-snsitem"><a class="footer-snslink" href="javascript:void(0)"><img th:src="@{/resources/icons/ico_instagram_lightgrey.svg}" alt="인스타그램"></a></li>
+        <li class="footer-snsitem"><a class="footer-snslink" href="javascript:void(0)"><img th:src="@{/resources/icons/ico_youtube_lightgrey.svg}" alt="유튜브"></a></li>
+        <li class="footer-snsitem"><a class="footer-snslink" href="javascript:void(0)"><img th:src="@{/resources/icons/ico_facebook_lightgrey.svg}" alt="페이스북"></a></li>
+        <li class="footer-snsitem"><a class="footer-snslink" href="javascript:void(0)"><img th:src="@{/resources/icons/ico_kakao_lightgrey.svg}" alt="카카오톡"></a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <h2 class="footer-logo">
+        <a href="javascript:void(0)">
+          <img th:src="@{/resources/images/pushtrip_logo_white.png}" alt="로고">
+        </a>
+      </h2>
+      <div class="footer-txt">
+        <p> 서울시 금천구 벚꽃로36길 30 가산 KS타워 1409호 </p>
+        <p><span>T. 070-8872-8874</span> <span>E. help@openfield.co.kr</span></p>
+      </div>
+      <div class="footer-txt">
+        <p>2022 BY TEMPLATEHOUSE. ALL RIGHTS RESERVED</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script th:src="@{/resources/js/setting.js}"></script>
+<script th:src="@{/resources/js/plugin.js}"></script>
+<script th:src="@{/resources/js/template.js}"></script>
+<script th:src="@{/resources/js/script.js}"></script>
+<script th:src="@{/resources/js/script_join_membership.js}"></script>
+<script th:src="@{/resources/js/chatbot.js}"></script>
+<script src="/resources/js/login_logout.js"></script>
+<script src="/resources/js/openMessage.js"></script>
+
+
+</body>
+</html>
