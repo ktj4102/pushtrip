@@ -40,7 +40,7 @@
 <hr/>
 
 ### 서비스 시연 영상
-제작예정
+<iframe width="956" height="538" src="https://www.youtube.com/embed/ozv4q2ov3Mk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### 🎯서비스 핵심기능
 ```
