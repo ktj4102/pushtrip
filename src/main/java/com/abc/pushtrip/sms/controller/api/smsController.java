@@ -38,7 +38,7 @@ public class smsController {
 
     public smsController() {
 
-        this.messageService = NurigoApp.INSTANCE.initialize("NCSBAZBFYGASMSVD", "AYKBNTG6WQGH3FEUS93WMA9ITQRLYZBO", "https://api.coolsms.co.kr");
+        this.messageService = NurigoApp.INSTANCE.initialize("키");
     }
 
 
@@ -49,7 +49,7 @@ public class smsController {
             User user = userRepository.findByTel(tel);
             if (user != null) {
                 Message message = new Message();
-                String pushtrip = "01081039927";
+                String pushtrip = "발신자";
                 String code = String.format("%06d", new Random().nextInt(1000000));
                 LocalDateTime expiryDate = LocalDateTime.now().plusMinutes(5);
 
@@ -118,7 +118,7 @@ public class smsController {
 
             // 메시지를 설정합니다.
             Message message = new Message();
-            String pushtrip = "01081039927"; // 발신자 번호
+            String pushtrip = "발신자"; 
             message.setFrom(pushtrip);
             message.setTo(tel);
             message.setText("pushtrip 인증번호: " + code);
@@ -183,7 +183,7 @@ public class smsController {
                 userRepository.save(user);
 
                 Message message = new Message();
-                String pushtrip = "01081039927";
+                String pushtrip = "발신자";
                 message.setFrom(pushtrip);
                 message.setTo(tel);
                 message.setText("pushtrip임시비밀번호: " + tempPassword + "\n로그인 후 비밀번호를 변경해 주세요.");
