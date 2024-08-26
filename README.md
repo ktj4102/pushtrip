@@ -40,8 +40,8 @@
 <hr/>
 
 ### 서비스 시연 영상
-[![YouTube](https://github.com/user-attachments/assets/a67e4a70-11c5-4441-bcca-f10b2ec823f7)](https://youtu.be/rt0gXZzta-8)
-
+![YouTube](https://github.com/user-attachments/assets/a67e4a70-11c5-4441-bcca-f10b2ec823f7)(https://youtu.be/rt0gXZzta-8)
+![pushtripYouTube](https://github.com/user-attachments/assets/aa37c5fe-39a8-483e-82b2-df3ba0fba875)(https://youtu.be/rt0gXZzta-8)
 
 ### 🎯서비스 핵심기능
 ```
