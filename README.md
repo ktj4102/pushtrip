@@ -1,10 +1,10 @@
 #pushtrip(최종 프로젝트)
 
 ## EMAIL
-- 김태주 :<0690lsh@nave.com>
-- 김민욱 :<stardust117@nave.com>
+- 김태주 :<0690lsh@naver.com>
+- 김민욱 :<stardust117@naver.com>
 - 김승진 :<soojoo0114@gmail.com>
-- 이호기 :<sackje4896@nave.com>
+- 이호기 :<sackje4896@naver.com>
 
 ## 프로젝트 소개
 
